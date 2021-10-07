@@ -30,4 +30,4 @@ Outputs:
     Description: Security Group
     Value: !Ref SecurityGroup
     Export:
-      Name: SecurityGroup112      
+      Name: !Sub 'SecurityGroup-${EnvType}'  
