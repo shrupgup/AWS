@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: ""
+
+Parameters:
+  EnvType: 
+    Description: Env in which u want to create
+    Type: String
+    AllowedValues: 
+      - nprd
+      - prd
+Resources:
+
+
+  SecurityGroup: 
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupDescription: String
+      GroupName: securityGroup
+      SecurityGroupEgress: 
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        DestinationPrefixListId:
+            Fn::ImportValue: !Sub "ManagedPrefixList-${EnvType}"
+      VpcId: 'vpc-****'        
+
+Outputs:
+
+  ScurityGroup:
+    Description: Security Group
+    Value: !Ref SecurityGroup
+    Export:
+      Name: SecurityGroup112      
